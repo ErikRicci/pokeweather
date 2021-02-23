@@ -14,5 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+    $cities = file_get_contents(base_path('public/cities.json'));
+    $cities = json_decode($cities);
+    $cities = $cities->cities;
+
+    return view('welcome', [
+        'cities' => $cities
+    ]);
 });
