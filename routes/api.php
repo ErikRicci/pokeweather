@@ -96,6 +96,8 @@ Route::get('/', function (Request $request) {
         return $poke_data;
     }
 
+
+    //Checagem para as temperturas
     if ($temp < 5)
         $poke_data = randomPokemon('ice', $raining);
 
@@ -119,6 +121,11 @@ Route::get('/', function (Request $request) {
 
     else
         $poke_data = randomPokemon('normal', $raining);
+
+    //Se o pokémon for o mesmo de antes
+    //Não consegui imaginar um jeito de adaptar meu código pra isso...
+    //O approach seria pegar o ID do pokémon e, se for o mesmo do old_pokemon,
+    //eu refazia a busca!
 
     return view('welcome')->with([
         'cities' => $cities,

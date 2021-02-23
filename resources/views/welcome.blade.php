@@ -11,6 +11,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <style>
+        body {
+            background: rgb(223, 236, 241);
+        }
         .autocomplete {
             position: relative;
             display: inline-block;
@@ -24,11 +27,6 @@
         input[type=text] {
             background-color: #f1f1f1;
             width: 100%;
-        }
-        input[type=submit] {
-            background-color: DodgerBlue;
-            color: #fff;
-            cursor: pointer;
         }
         .autocomplete-items {
             position: absolute;
@@ -72,7 +70,6 @@
             position: absolute;
             top: 50%;
             margin-top: -75px;
-            color: #FFF;
         }
 
     </style>
@@ -83,50 +80,56 @@
     <main role="main" class="flex-shrink-0">
         <div class="container">
             <div class="row py-3">
-                <div class="col-3 order-2" id="sticky-sidebar">
-                    <div class="sticky-top">
-                        <div class="nav flex-column">
-                            <form autocomplete="off" action="{{ route('city') }}">
-                                <div class="autocomplete" style="width:100%">
-                                    <input id="myInput" type="text" required name="city" placeholder="Insira aqui uma cidade...">
-                                </div>
-                                <div style="width:30%">
-                                    <input type="submit">
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
                 <div class="col" id="main">
-                    <h1>Poké Weather™</h1>
+                    <h1><img src="{{ asset('logo.png') }}" alt="" class="img-fluid">™</h1>
                     <h3 class="display-6">Encontre o pokémon perfeito para seu clima!</h3>
-
-                    <div class="img">
-                        <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/12ecb7ae-7059-48df-a4f8-2e3fb7858606/d47rmjf-de88a574-49c8-4dcf-9df4-7e11722e8bec.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8xMmVjYjdhZS03MDU5LTQ4ZGYtYTRmOC0yZTNmYjc4NTg2MDYvZDQ3cm1qZi1kZTg4YTU3NC00OWM4LTRkY2YtOWRmNC03ZTExNzIyZThiZWMucG5nIn1dXX0.qQtrPbihCWTTF7bQl9cQzUVnPw_yhtVNHAWcDgQV8k4"
-                        style="border-radius: 12px"/>
-                        <div style="width: 100%">
-                            <img class="img-fluid" src="@isset($poke_data) {{ url($poke_data[2]) }} @endisset"
-                            style="z-index: 2; margin-left: 18%">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="img">
+                                <img class="img-fluid" src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/12ecb7ae-7059-48df-a4f8-2e3fb7858606/d47rmjf-de88a574-49c8-4dcf-9df4-7e11722e8bec.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwic3ViIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsImF1ZCI6WyJ1cm46c2VydmljZTpmaWxlLmRvd25sb2FkIl0sIm9iaiI6W1t7InBhdGgiOiIvZi8xMmVjYjdhZS03MDU5LTQ4ZGYtYTRmOC0yZTNmYjc4NTg2MDYvZDQ3cm1qZi1kZTg4YTU3NC00OWM4LTRkY2YtOWRmNC03ZTExNzIyZThiZWMucG5nIn1dXX0.qQtrPbihCWTTF7bQl9cQzUVnPw_yhtVNHAWcDgQV8k4"
+                                style="border-radius: 12px"/>
+                                <div style="width: 100%">
+                                    <img class="img-fluid" src="@isset($poke_data) {{ url($poke_data[2]) }} @endisset"
+                                    style="z-index: 2; margin-left: 18%">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <h5>
+                                Procurar uma cidade:
+                            </h5>
+                            <form autocomplete="off" action="{{ route('city') }}" class="form-group">
+                                <input type="hidden" name="old_pokemon" value="@isset($old_pokemon) {{$old_pokemon}} @endisset">
+                                <div class="autocomplete" style="width:100%">
+                                    <input id="myInput" type="text" required name="city" placeholder="Insira aqui o nome de uma cidade do mundo...">
+                                </div>
+                                <button type="submit" class="btn btn-primary">
+                                    Procurar
+                                </button>
+                            </form>
                         </div>
                     </div>
                     <hr>
                     {{-- Caso haja dados da cidade, fazemos uma listagem de informações --}}
                     @isset($city_data)
-                        <div>
+                        <div class="row">
                             <h1>
                                     {{ ucfirst($city_data[2]) }}
                             </h1>
-                            <li>
-                                    {{ ucfirst($city_data[0]) }} °C
-                            </li>
-                            <li>
-                                    {{ ucfirst($city_data[1]) }}
-                            </li>
-                            <li>
+                            <div class="col-sm">
+                                <h6> POKÉMON </h6>
                                 @isset($poke_data)
                                     {{ ucfirst($poke_data[1]) }}
                                 @endisset
-                            </li>
+                            </div>
+                            <div class="col-sm">
+                                <h6> TEMPERATURA </h6>
+                                    {{ ucfirst($city_data[0]) }} °C
+                            </div>
+                            <div class="col-sm">
+                                <h6> SITUAÇÃO </h6>
+                                    {{ ucfirst($city_data[1]) }}
+                            </div>
                         </div>
                     @endisset
                 </div>
